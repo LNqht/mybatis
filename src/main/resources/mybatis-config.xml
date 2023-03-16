@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!--是否开启全局二级缓存-->
+		<setting name="cacheEnabled" value="true"/>
+		<!-- 是否在控制台打印日志 -->
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings>
+	<!--类的别名配置区域-->
+	<typeAliases>
+		<!--单独对某个类设置alias属性可以不写，默认为类名，不区分大小写-->
+		<typeAlias type="com.hdjd.pojo.User"></typeAlias>
+		<!--配置扫描某个包中的类，结合 @Alias注解使用，此包中有注解的都会用注解的别名-->
+		<package name="com.hdjd.pojo"/>
+	</typeAliases>
+	
+	<!-- 配置默认的数据库连接 -->
+	<environments default="mysqldb">
+		<!-- 配置数据库连接信息 -->
+		<environment id="mysqldb">
+            <!--事务管理 JDBC-->
+			<transactionManager type="jdbc"></transactionManager>
+			<dataSource type="pooled">
+				<property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+				<property name="url" value="jdbc:mysql://localhost:3306/test1?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT%2B8&amp;relaxAutoCommit=true&amp;zeroDateTimeBehavior=convertToNull&amp;allowMultiQueries=true"/>
+				<property name="username" value="root"/>
+				<property name="password" value="123456"/>
+			</dataSource>
+		</environment>
+	</environments>
+
+	<!--配置映射文件-->
+    <!--每一个Mapper.xml都要在Mybatis核心配置文件中注册-->
+	<mappers>
+		<mapper resource="com/hdjd/dao/UserMapper.xml"></mapper>
+		<mapper resource="com/hdjd/dao/EmployeeMapper.xml"></mapper>
+		<mapper resource="com/hdjd/dao/DeptMapper.xml"></mapper>
+	</mappers>
+</configuration>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace绑定一个对应的Mapper接口-->
+<mapper namespace="com.hdjd.dao.EmployeeMapper">
+    <resultMap id="empMap" type="com.hdjd.pojo.Employee">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <!--关联部门表的信息-->
+        <association property="dept" column="did"
+                     javaType="com.hdjd.pojo.Dept"
+            select="com.hdjd.dao.DeptMapper.selectById">
+            <id column="id" property="id"></id>
+            <result column="name" property="name"></result>
+        </association>
+    </resultMap>
+    <select id="findAllEmp" resultMap="empMap">
+        select id, name, did from employee
+    </select>
+
+    <resultMap id="empMap2" type="com.hdjd.pojo.Employee">
+        <id column="eid" property="id"></id>
+        <result column="ename" property="name"></result>
+        <!--关联部门表的信息-->
+        <association property="dept" javaType="com.hdjd.pojo.Dept">
+            <id column="did" property="id"></id>
+            <result column="dname" property="name"></result>
+        </association>
+    </resultMap>
+    <select id="findAllEmp2" resultMap="empMap2">
+        select e.id eid, e.name ename, d.id did, d.name dname from employee e
+        left join dept d
+        on d.id = e.did
+    </select>
+</mapper>

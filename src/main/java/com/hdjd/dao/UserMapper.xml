@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace绑定一个对应的Mapper接口-->
+<mapper namespace="com.hdjd.dao.UserMapper">
+    <!--select查询语句-->
+    <!--id相当于重写Dao的方法-->
+    <select id="getAllUser"  resultType="user">
+        select * from xm_users
+    </select>
+    <select id="getUserById" resultType="com.hdjd.pojo.User" parameterType="int">
+        select * from xm_users where id = #{id}
+    </select>
+    <!--parameterType参数类型-->
+    <!--#{name} 前提是类的属性名和数据库的字段名一致-->
+    <insert id="addUser" parameterType="com.hdjd.pojo.User">
+        insert into xm_users (username,password) values (#{name},#{password})
+    </insert>
+    <!--配置结果集映射-->
+<!--    <resultMap id="userMap" type="com.hdjd.pojo.User">-->
+<!--        &lt;!&ndash;id为主键子段&ndash;&gt;-->
+<!--        &lt;!&ndash;column是数据库的列明，property是java对象的属性名&ndash;&gt;-->
+<!--        <id column="id" property="id"></id>-->
+<!--        <result column="username" property="name"></result>-->
+<!--        <result column="password" property="password"></result>-->
+<!--    </resultMap>-->
+<!--    &lt;!&ndash;查询语句的结果集映射关系调用上面写的resultMap&ndash;&gt;-->
+<!--    <select id="getUserByName" resultMap="userMap">-->
+<!--        select * from xm_users where name = #{name}-->
+<!--    </select>-->
+<!--    &lt;!&ndash;模糊查询的方法&ndash;&gt;-->
+<!--    <select id="getUserNameLike" resultType="com.hdjd.pojo.User">-->
+<!--        select * from xm_users where name like #{va}-->
+<!--#         select * from xm_users where name like concat('%',#{va},'%')-->
+<!--    </select>-->
+<!--    <insert id="addUser2" parameterType="map">-->
+<!--    &lt;!&ndash;参数类型是map，#username是自己取的，要与map中的key对应&ndash;&gt;-->
+<!--        insert into xm_users (name,password) values (#{username},#{password})-->
+<!--    </insert>-->
+<!--    &lt;!&ndash;多条件查询&ndash;&gt;-->
+<!--    <select id="findUserByUser" resultType="User">-->
+<!--        select * from xm_users where 1 = 1-->
+<!--        <if test="id != 0">-->
+<!--            and id = #{id}-->
+<!--        </if>-->
+<!--        <if test="name != null and name != ''">-->
+<!--            and name = #{name}-->
+<!--        </if>-->
+<!--        <if test="password != null and password != ''">-->
+<!--            and password = #{password}-->
+<!--        </if>-->
+<!--    </select>-->
+<!--    &lt;!&ndash;trim的用法&ndash;&gt;-->
+<!--    <select id="select" resultType="user">-->
+<!--        select * from xm_users-->
+<!--        <trim prefix="where" prefixOverrides="and">-->
+<!--            <if test="id != 0">-->
+<!--                and id = #{id}-->
+<!--            </if>-->
+<!--            <if test="username != null and username != ''">-->
+<!--                and username like concat('%', #{username}, '%')-->
+<!--            </if>-->
+<!--        </trim>-->
+<!--    </select>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <update id="updateUserById" parameterType="com.hdjd.pojo.User">
+        update xm_users set username = #{name}, password = #{password} where id = #{id}
+    </update>
+    <delete id="deleteUserById" parameterType="com.hdjd.pojo.User">
+        delete from xm_users where id = #{id}
+    </delete>
+</mapper>
