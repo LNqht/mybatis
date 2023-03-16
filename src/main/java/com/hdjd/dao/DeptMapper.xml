@@ -11,4 +11,18 @@
     <select id="selectById" resultMap="deptMap">
         select id, name from dept where id = #{id}
     </select>
+<!---->
+    <resultMap id="deptMap2" type="com.hdjd.pojo.Dept">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <!--生成部门对象的员工集合属性-->
+        <collection property="employees" javaType="list" ofType="com.hdjd.pojo.Employee"
+                    column="id" select="com.hdjd.dao.EmployeeMapper.findEmpByDid">
+            <id column="eid" property="id"></id>
+            <result column="ename" property="name"></result>
+        </collection>
+    </resultMap>
+    <select id="selectById2" resultMap="deptMap2">
+        select id, name from dept where id = #{id}
+    </select>
 </mapper>

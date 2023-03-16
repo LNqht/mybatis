@@ -1,5 +1,7 @@
+import com.hdjd.dao.DeptMapper;
 import com.hdjd.dao.EmployeeMapper;
 import com.hdjd.dao.UserMapper;
+import com.hdjd.pojo.Dept;
 import com.hdjd.pojo.Employee;
 import com.hdjd.pojo.User;
 import com.hdjd.util.MybatisUtil;
@@ -143,6 +145,19 @@ public class UserTest {
         for (Employee employee : list) {
             System.out.println(employee);
         }
+        //关闭sqlSession
+        sqlSession.close();
+    }
+    @Test
+    public void userTest11() {
+        //获取SqlSession对象
+        SqlSession sqlSession = MybatisUtil.getSqlSession();
+        //执行sql语句
+        //会执行两个sql语句
+        //按结果嵌套，只执行一个sql语句
+        DeptMapper deptMapper = sqlSession.getMapper(DeptMapper.class);
+        Dept dept = deptMapper.selectById2(1);
+        System.out.println(dept);
         //关闭sqlSession
         sqlSession.close();
     }

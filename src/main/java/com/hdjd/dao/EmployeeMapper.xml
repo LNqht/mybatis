@@ -18,7 +18,7 @@
     <select id="findAllEmp" resultMap="empMap">
         select id, name, did from employee
     </select>
-
+<!---->
     <resultMap id="empMap2" type="com.hdjd.pojo.Employee">
         <id column="eid" property="id"></id>
         <result column="ename" property="name"></result>
@@ -32,5 +32,13 @@
         select e.id eid, e.name ename, d.id did, d.name dname from employee e
         left join dept d
         on d.id = e.did
+    </select>
+<!---->
+    <resultMap id="empMap3" type="com.hdjd.pojo.Employee">
+        <id column="eid" property="id"></id>
+        <result column="ename" property="name"></result>
+    </resultMap>
+    <select id="findEmpByDid" resultMap="empMap3">
+        select id eid, name ename from employee where did = #{did}
     </select>
 </mapper>

@@ -9,4 +9,6 @@ public interface EmployeeMapper {
     List<Employee> findAllEmp();
     //按结果嵌套
     List<Employee> findAllEmp2();
+    //根据部门id查找员工
+    List<Employee> findEmpByDid(int did);
 }

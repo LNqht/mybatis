@@ -18,51 +18,51 @@
         insert into xm_users (username,password) values (#{name},#{password})
     </insert>
     <!--配置结果集映射-->
-<!--    <resultMap id="userMap" type="com.hdjd.pojo.User">-->
-<!--        &lt;!&ndash;id为主键子段&ndash;&gt;-->
-<!--        &lt;!&ndash;column是数据库的列明，property是java对象的属性名&ndash;&gt;-->
-<!--        <id column="id" property="id"></id>-->
-<!--        <result column="username" property="name"></result>-->
-<!--        <result column="password" property="password"></result>-->
-<!--    </resultMap>-->
-<!--    &lt;!&ndash;查询语句的结果集映射关系调用上面写的resultMap&ndash;&gt;-->
-<!--    <select id="getUserByName" resultMap="userMap">-->
-<!--        select * from xm_users where name = #{name}-->
-<!--    </select>-->
-<!--    &lt;!&ndash;模糊查询的方法&ndash;&gt;-->
-<!--    <select id="getUserNameLike" resultType="com.hdjd.pojo.User">-->
-<!--        select * from xm_users where name like #{va}-->
-<!--#         select * from xm_users where name like concat('%',#{va},'%')-->
-<!--    </select>-->
-<!--    <insert id="addUser2" parameterType="map">-->
-<!--    &lt;!&ndash;参数类型是map，#username是自己取的，要与map中的key对应&ndash;&gt;-->
-<!--        insert into xm_users (name,password) values (#{username},#{password})-->
-<!--    </insert>-->
-<!--    &lt;!&ndash;多条件查询&ndash;&gt;-->
-<!--    <select id="findUserByUser" resultType="User">-->
-<!--        select * from xm_users where 1 = 1-->
-<!--        <if test="id != 0">-->
-<!--            and id = #{id}-->
-<!--        </if>-->
-<!--        <if test="name != null and name != ''">-->
-<!--            and name = #{name}-->
-<!--        </if>-->
-<!--        <if test="password != null and password != ''">-->
-<!--            and password = #{password}-->
-<!--        </if>-->
-<!--    </select>-->
-<!--    &lt;!&ndash;trim的用法&ndash;&gt;-->
-<!--    <select id="select" resultType="user">-->
-<!--        select * from xm_users-->
-<!--        <trim prefix="where" prefixOverrides="and">-->
-<!--            <if test="id != 0">-->
-<!--                and id = #{id}-->
-<!--            </if>-->
-<!--            <if test="username != null and username != ''">-->
-<!--                and username like concat('%', #{username}, '%')-->
-<!--            </if>-->
-<!--        </trim>-->
-<!--    </select>-->
+    <resultMap id="userMap" type="com.hdjd.pojo.User">
+        <!--id为主键子段-->
+        <!--column是数据库的列明，property是java对象的属性名-->
+        <id column="id" property="id"></id>
+        <result column="username" property="name"></result>
+        <result column="password" property="password"></result>
+    </resultMap>
+    <!--查询语句的结果集映射关系调用上面写的resultMap-->
+    <select id="getUserByName" resultMap="userMap">
+        select * from xm_users where username = #{name}
+    </select>
+    <!--模糊查询的方法-->
+    <select id="getUserNameLike" resultType="com.hdjd.pojo.User">
+        select * from xm_users where username like #{va}
+#         select * from xm_users where name like concat('%',#{va},'%')
+    </select>
+    <insert id="addUser2" parameterType="map">
+    <!--参数类型是map，#username是自己取的，要与map中的key对应-->
+        insert into xm_users (username,password) values (#{username},#{password})
+    </insert>
+    <!--多条件查询-->
+    <select id="findUserByUser" resultType="User">
+        select * from xm_users where 1 = 1
+        <if test="id != 0">
+            and id = #{id}
+        </if>
+        <if test="name != null and name != ''">
+            and username = #{name}
+        </if>
+        <if test="password != null and password != ''">
+            and password = #{password}
+        </if>
+    </select>
+    <!--trim的用法-->
+    <select id="select" resultType="user">
+        select * from xm_users
+        <trim prefix="where" prefixOverrides="and">
+            <if test="id != 0">
+                and id = #{id}
+            </if>
+            <if test="username != null and username != ''">
+                and username like concat('%', #{username}, '%')
+            </if>
+        </trim>
+    </select>
 
 
 
